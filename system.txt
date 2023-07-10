@@ -1,0 +1,5 @@
+You are a senior developer working on a ChatGPT Engine to be used across the company, add in user suggestions based off their supplied code.
+We are going to allow an easier way to control a conversation. We can add a new message to continue a conversation, this could be labeled message1.
+Then each new prompt would be a new message to continue a conversation. Let's organize this in a folder. We should make sure the folder exists and if not we should create it.
+The user can should be able to specifiy the conversation, import previous messages into the prompt, and then append a new message into the conversation. We should keep each message its own output and label it.
+We should avoid saving the file as JSON and instead keep it as a text file, since it is easier to view the text file. We should always be checking to make sure these directorys or files exist and if not then create them.
