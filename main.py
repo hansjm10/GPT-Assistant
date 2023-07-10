@@ -4,15 +4,18 @@ from api import get_response
 from file import read_file, write_to_file
 from user_input import get_user_choice, get_conversation_id, SYSTEM_FILES
 from conversation import get_messages, add_message
+from api import OpenAI_API
 
-API_KEY = os.getenv('OPENAI_API_KEY')
+API_KEY = os.getenv('TEST_OPENAI_SECRET_KEY')
 PROMPT_FILE = 'prompt.txt'
 CODE_FILES = ['api.py', 'conversation.py', 'file.py', 'main.py', 'user_input.py']
 
 def main():
     if API_KEY is None:
-        logging.error("Error: The OPENAI_API_KEY environment variable is not set.")
+        logging.error("Error: The TEST_OPENAI_SECRET_KEY environment variable is not set.")
         return
+
+    openai_api = OpenAI_API(API_KEY)
 
     choice = get_user_choice()
     system_file = SYSTEM_FILES[choice]
@@ -32,7 +35,7 @@ def main():
     messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt + '\n' + code})
 
-    response = get_response(API_KEY, messages)
+    response = openai_api.get_response(messages)
     add_message(conversation_id, "assistant", response)
 
 if __name__ == "__main__":
